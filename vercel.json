@@ -6,10 +6,10 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/dist"
+      "src": "/(.*)",
+      "dest": "dist/index.js"
     }
   ],
   "buildCommand": "npm run build"
