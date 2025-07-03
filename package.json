@@ -1,0 +1,29 @@
+{
+  "name": "line-bot-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "gen-env": "gen-env-types .env -o src/env.d.ts -e .",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/index.js",
+    "create-rich-menu": "ts-node src/createRichMenu.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@line/bot-sdk": "^10.0.0",
+    "dotenv-safe": "^9.1.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/dotenv-safe": "^8.1.6",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
