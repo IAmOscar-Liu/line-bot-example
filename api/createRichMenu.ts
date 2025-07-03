@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { messagingApi } from "@line/bot-sdk";
-import "dotenv-safe/config";
+import "dotenv/config";
 
 const client = new messagingApi.MessagingApiClient({
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN!,

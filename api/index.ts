@@ -1,5 +1,5 @@
 import { middleware, webhook } from "@line/bot-sdk";
-import "dotenv-safe/config";
+import "dotenv/config";
 import express from "express";
 import { handleJoin } from "./handler/join";
 import { handleTextMessage } from "./handler/textMessage";
@@ -9,6 +9,8 @@ import { handleConfirmMessage } from "./handler/confirmMessage";
 const lineMiddleware = middleware({
   channelSecret: process.env.LINE_CHANNEL_SECRET!,
 });
+
+console.log(process.env.LINE_CHANNEL_SECRET);
 
 // create Express app
 // about Express itself: https://expressjs.com/
