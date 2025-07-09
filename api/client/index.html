@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>申請成為業務</title>
+    <script
+      charset="utf-8"
+      src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"
+    ></script>
+  </head>
+  <body>
+    <main class="main">Test Client</main>
+    <div style="display: flex; justify-content: center; gap: 8px">
+      <button style="display: none" id="send-message-back-to-chat-room">
+        送出申請
+      </button>
+      <button style="display: none" id="close-liff-app">Close</button>
+    </div>
+  </body>
+
+  <script defer>
+    function init() {
+      // Example using window.location.replace()
+      return liff
+        .init({
+          liffId: "2007679854-JYDgj6Bo", // Use own liffId
+          withLoginOnExternalBrowser: true, // Enable automatic login process
+        })
+        .then(() => true)
+        .catch(() => false);
+    }
+
+    function showCloseAppButton() {
+      if (!liff.isInClient()) return;
+
+      const closeBtn = document.getElementById("close-liff-app");
+      closeBtn.style.display = "block";
+      closeBtn.onclick = function () {
+        liff.closeWindow();
+      };
+    }
+
+    function showSendMessageButton(idToken) {
+      const sendMsgBtn = document.getElementById(
+        "send-message-back-to-chat-room"
+      );
+      sendMsgBtn.style.display = "block";
+      sendMsgBtn.onclick = function () {
+        liff
+          .sendMessages([
+            {
+              type: "text",
+              text: `${idToken.name}已送出成為業務申請`,
+            },
+          ])
+          .then(() => {
+            console.log("message sent");
+            liff.closeWindow();
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      };
+    }
+
+    function getUserProfile() {
+      const idToken = liff.getDecodedIDToken();
+      return idToken; // print decoded idToken object
+    }
+
+    async function main() {
+      const main = document.querySelector("main.main");
+      if (!(await init())) main.textContent = "Failed to init liff";
+
+      const idToken = getUserProfile();
+
+      showCloseAppButton();
+      if (idToken) {
+        main.innerHTML = JSON.stringify(idToken, null, 2);
+        showSendMessageButton(idToken);
+      }
+    }
+
+    main();
+  </script>
+</html>
