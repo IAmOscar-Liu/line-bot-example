@@ -1,5 +1,5 @@
-// line-bot-example/api/handler/liffButtonMessage.ts
 import { messagingApi } from "@line/bot-sdk";
+import client from "../lib/client";
 
 export function handleLiffButtonMessage({
   replyToken,
@@ -25,11 +25,6 @@ export function handleLiffButtonMessage({
       ],
     },
   };
-
-  // You need to create a LINE client instance to reply
-  const client = new messagingApi.MessagingApiClient({
-    channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN!,
-  });
 
   return client.replyMessage({
     replyToken,

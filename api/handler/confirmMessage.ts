@@ -1,4 +1,4 @@
-import { webhook, messagingApi } from "@line/bot-sdk";
+import { messagingApi } from "@line/bot-sdk";
 import client from "../lib/client";
 
 export function handleConfirmMessage({
